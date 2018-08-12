@@ -143,9 +143,9 @@ class HomeworkTests(unittest.TestCase):
         self.assertEqual(test_repo.instructors['98762'].courses, {})
 
 def main():
-    DB_FILE = "/Users/ALEX/Documents/Stevens/SSW810/Homework/HW11/810_startup.db"
+    DB_FILE = "/Users/alexbehrman/Documents/HW/SSW810-DataRepo/810_startup.db"
     db = sqlite3.connect(DB_FILE)
-    query = "select i.CWID, i.NAME, i.DEPT, g.COURSE, count(g.COURSE) as ENROLLMENT from Instructors i join Grades g on i.CWID = g.INSTRUCTOR_CWID group by g.COURSE order by i.CWID"
+    query = "select i.CWID, i.NAME, i.DEPT, g.COURSE, count(g.COURSE) as ENROLLMENT from HW11_Instructors i join HW11_Grades g on i.CWID = g.INSTRUCTOR_CWID group by g.COURSE order by i.CWID"
     instructor_db = PrettyTable(field_names=['CWID', 'Name', 'Dept', 'Course', 'Students'])
     for row in db.execute(query):
         instructor_db.add_row(row)
@@ -153,9 +153,9 @@ def main():
     print(instructor_db)
     print("\n")  
 
-    stevens = Repository("/Users/ALEX/Documents/Stevens/SSW810/Homework/HW11/testfiles")
+    stevens = Repository("/Users/alexbehrman/Documents/HW/SSW810-DataRepo/testfiles")
     stevens.scan(stevens.dir_path)
 
 if __name__ == "__main__":
-    unittest.main(exit=False, verbosity=2)
+    #unittest.main(exit=False, verbosity=2)
     main()
